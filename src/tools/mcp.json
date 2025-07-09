@@ -1,0 +1,34 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "MCP tool for retrieving US weather alerts and forecasts using the weather.gov API.",
+  "tools": {
+    "get-alerts": {
+      "summary": "Get current weather alerts for a US state.",
+      "description": "Returns active weather alerts from the National Weather Service for the provided US state code.",
+      "params": {
+        "state": {
+          "type": "string",
+          "description": "Two-letter US state code (e.g., CA, TX, NY).",
+          "examples": ["CA", "TX", "NY"]
+        }
+      }
+    },
+    "get-forecast": {
+      "summary": "Get a weather forecast for a geographic location.",
+      "description": "Retrieves a multi-period weather forecast from the National Weather Service for the provided latitude and longitude.",
+      "params": {
+        "latitude": {
+          "type": "number",
+          "description": "Latitude of the location (between -90 and 90).",
+          "examples": [37.7749]
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude of the location (between -180 and 180).",
+          "examples": [-122.4194]
+        }
+      }
+    }
+  }
+}
