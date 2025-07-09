@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+.env
+
+# TypeScript
+dist/
+build/
+*.tsbuildinfo
+
+# MCP / OpenUI
+.schemas/
+schemas/*.generated.json
+*.openapi.json
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Tests
+coverage/
+*.lcov
+
+# System
+Thumbs.db
