@@ -1,0 +1,47 @@
+services:
+  ollama:
+    image: ollama/ollama:0.5.13-rocm
+    ports:
+      - "11434:11434"
+    devices:
+      - "/dev/kfd"
+      - "/dev/dri"
+    group_add:
+      - "video"
+    environment:
+      - ROC_ENABLE=1
+      - HSA_OVERRIDE_GFX_VERSION=10.3.0
+      - LD_LIBRARY_PATH=/opt/rocm/lib
+    volumes:
+      - open-webui-local:/app/backend/data
+
+
+  openWebUI:
+    image: ghcr.io/open-webui/open-webui:latest
+    ports:
+      - "3000:8080"
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+        - SYS_PTRACE
+    ipc: host
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - open-webui-local:/app/backend/data
+  
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    container_name: mcpo
+    ports:
+      - "9000:8000"
+    volumes: 
+      - ./node_modules:/app/node_modules
+      - ./build:/app/build
+    working_dir: /app
+    command: >
+      --port 8000 --name weather-mcp -- node /app/build/index.js
+
+volumes:
+  open-webui-local:
+  ollama-local:
